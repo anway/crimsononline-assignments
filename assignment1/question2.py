@@ -1,3 +1,4 @@
+
 def parse_links_regex(filename):
     """question 2a
 
@@ -14,7 +15,19 @@ def parse_links_regex(filename):
 
     What does it make the most sense to do here? 
     """
-    pass
+    import re
+    f = open(filename,'r')
+    all = f.read()
+    target = re.findall('<a href="(.*?)">(.*?)</a>', all)
+    d = dict()
+    for link in target:
+        if link[1] in target:
+            d[link[1]].append(link[0])
+        else:
+            d[link[1]] = link[0]
+    pairs = zip(d.keys(), d.values())
+    for pair in pairs:
+        print'{}: {}'.format(pair[0],pair[1])
 
 def parse_links_xpath(filename):
     """question 2b
@@ -24,4 +37,16 @@ def parse_links_xpath(filename):
     
     Which approach is better? (Hint: http://goo.gl/mzl9t)
     """
-    pass
+    import lxml.html
+    f = open(filename,'r')
+    all = f.read()
+    tree = lxml.html.fromstring(all)
+    text = tree.xpath('//a//text()')
+    link = tree.xpath('//a//@href')
+    d=dict()
+    for i in range (1,min(len(text), len(link))):
+        if text[i] in d:
+            d[text[i]].append(link[i])
+        else:
+            d[text[i]]=[link[i]]
+    print d

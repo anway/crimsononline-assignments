@@ -34,9 +34,31 @@ print
 
 
 print "==testing question 3=="
-# ???
-print
-
+import question3
+p = question3.Person('Ques','Three','M')
+p.sayname()
+p.saygender()
+q = question3.Person('three','questions','F')
+q.sayname()
+q.saygender()
+r = question3.Person('ab','cdef','L')
+sciencecenter = question3.Building((0,0))
+sciencecenter.enter(p,103)
+sciencecenter.where_is(p)
+sciencecenter.where_is(q)
+sciencecenter.rollcall()
+boringbuilding = question3.OfficeBuilding([p],(0,0))
+boringbuilding.enter(p,103)
+boringbuilding.where_is(p)
+boringbuilding.enter(q,100)
+newhaus = question3.House((1,0))
+newhaus.enter(p)
+newhaus.at_home(p)
+question3.buildinglocations((0,0))
+question3.buildinglocations((1,0))
+question3.buildinglocations((5,5))
+sciencecenter[105]=p
+sciencecenter.where_is(p)
 
 print "==testing question 4=="
 print "github url: {}".format(GITHUB_URL)
